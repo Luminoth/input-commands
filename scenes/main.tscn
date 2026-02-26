@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dmlo3u0fikt47"]
+
+[ext_resource type="Script" uid="uid://caw4v5k4kxthq" path="res://scripts/FollowCamera.cs" id="1_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://be0g85iv8h7sq" path="res://scenes/world/box.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://2yowolv4nsf1" path="res://scenes/world/floor.tscn" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://c5smyqrb8goor" path="res://scenes/player.tscn" id="2_0wfyh"]
+
+[node name="Node3D" type="Node3D" unique_id=1289818345]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=278018361 node_paths=PackedStringArray("_target")]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
+script = ExtResource("1_jyhfs")
+_target = NodePath("../Player")
+
+[node name="World" type="Node3D" parent="." unique_id=705136912]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=723364393]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+
+[node name="Floor" parent="World" unique_id=168910984 instance=ExtResource("1_sugp2")]
+
+[node name="Obstacles" type="Node3D" parent="World" unique_id=768935689]
+
+[node name="Box" parent="World/Obstacles" unique_id=2038126841 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -10)
+
+[node name="Box2" parent="World/Obstacles" unique_id=1091842213 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.5, -10)
+
+[node name="Box3" parent="World/Obstacles" unique_id=1389446731 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -10)
+
+[node name="Player" parent="." unique_id=509620272 instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

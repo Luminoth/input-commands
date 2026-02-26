@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c5smyqrb8goor"]
+
+[ext_resource type="Script" uid="uid://cmvs2nce8hcrm" path="res://scripts/Player.cs" id="1_3vyb7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sgp6g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8vuu"]
+albedo_color = Color(0.47529578, 0.18804416, 0.12271132, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o5qli"]
+material = SubResource("StandardMaterial3D_u8vuu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vyb7"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g2els"]
+material = SubResource("StandardMaterial3D_3vyb7")
+radius = 0.1
+height = 0.5
+
+[node name="Player" type="CharacterBody3D" unique_id=509620272 node_paths=PackedStringArray("_pivot")]
+collision_layer = 2
+script = ExtResource("1_3vyb7")
+_pivot = NodePath("Pivot")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=906728153]
+shape = SubResource("CapsuleShape3D_sgp6g")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=107825548]
+
+[node name="Body" type="MeshInstance3D" parent="Pivot" unique_id=2046015183]
+mesh = SubResource("CapsuleMesh_o5qli")
+
+[node name="Nose" type="MeshInstance3D" parent="Pivot" unique_id=1756634824]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.5, -0.5)
+mesh = SubResource("CapsuleMesh_g2els")
