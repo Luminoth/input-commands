@@ -3,29 +3,30 @@ using Godot;
 public partial class FollowCamera : Camera3D
 {
     [Export]
-    private Node3D _target;
+    private Node3D _followTarget;
 
     [Export]
-    private Vector3 _offset = new Vector3(0, 2, 5);
+    private Vector3 _followOffset = new(0.0f, 5.0f, 5.0f);
 
     [Export]
-    private float _smoothingSpeed = 5.0f;
+    private Node3D _lookAtTarget;
 
     public override void _Ready()
     {
-        GlobalPosition = _target.GlobalPosition + _offset;
+        GlobalPosition = _followTarget.GlobalPosition + _followOffset;
     }
 
     public override void _Process(double delta)
     {
-        if (_target == null)
+        if (_followTarget != null)
         {
-            return;
+            Vector3 desiredPosition = _followTarget.GlobalPosition + _followOffset;
+            GlobalPosition = desiredPosition;
         }
 
-        Vector3 desiredPosition = _target.GlobalPosition + _offset;
-        //GlobalPosition = GlobalPosition.Lerp(desiredPosition, (float)delta * _smoothingSpeed);
-        GlobalPosition = desiredPosition;
-        LookAt(_target.GlobalPosition + Vector3.Up * 1.5f, Vector3.Up);
+        if (_lookAtTarget != null)
+        {
+            LookAt(_lookAtTarget.GlobalPosition + Vector3.Up * 1.5f, Vector3.Up);
+        }
     }
 }
