@@ -19,6 +19,8 @@ public partial class Player : CharacterBody3D, ICharacter
     [Export]
     private Node3D _pivot;
 
+    public Node3D Pivot => _pivot;
+
     private Vector3 _targetVelocity = Vector3.Zero;
 
     public override void _Ready()
@@ -32,11 +34,19 @@ public partial class Player : CharacterBody3D, ICharacter
         if (MoveDirection != Vector2.Zero)
         {
             MoveDirection = MoveDirection.Normalized();
-            _pivot.Basis = Basis.LookingAt(new Vector3(MoveDirection.X, 0.0f, MoveDirection.Y));
+            //_pivot.Basis = Basis.LookingAt(new Vector3(MoveDirection.X, 0.0f, MoveDirection.Y));
         }
 
-        _targetVelocity.X = MoveDirection.X * _moveSpeed;
-        _targetVelocity.Z = MoveDirection.Y * _moveSpeed;
+        if (MoveDirection != Vector2.Zero)
+        {
+            _targetVelocity.X = MoveDirection.X * _moveSpeed;
+            _targetVelocity.Z = MoveDirection.Y * _moveSpeed;
+        }
+        else
+        {
+            _targetVelocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed);
+            _targetVelocity.Z = Mathf.MoveToward(Velocity.Z, 0, _moveSpeed);
+        }
 
         if (!IsOnFloor())
         {

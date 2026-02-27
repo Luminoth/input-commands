@@ -12,6 +12,8 @@ public partial class InputManager : Node
     [Export]
     public Node Actor;
 
+    private Vector2 _lookIntent = Vector2.Zero;
+
     public void PushContext(InputContext context) => _contextStack.Push(context);
 
     public void PopContext() => _contextStack.Pop();
@@ -56,6 +58,19 @@ public partial class InputManager : Node
         }
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (_contextStack.Count == 0 || Actor == null)
+        {
+            return;
+        }
+
+        if (@event is InputEventMouseMotion mouseMotion)
+        {
+            _lookIntent = mouseMotion.Relative.Normalized();
+        }
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if (_contextStack.Count == 0 || Actor == null)
@@ -64,6 +79,15 @@ public partial class InputManager : Node
         }
 
         InputContext currentContext = _contextStack.Peek();
+
+        if (_lookIntent != Vector2.Zero)
+        {
+            var aimCommand = currentContext.GetCommand("aim");
+            aimCommand?.Execute(Actor, _lookIntent);
+
+            _lookIntent = Vector2.Zero;
+        }
+
         foreach (var action in currentContext.Actions.Keys)
         {
             if (InputMap.HasAction(action) && @event.IsActionPressed(action))

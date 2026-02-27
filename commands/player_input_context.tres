@@ -3,10 +3,12 @@
 [ext_resource type="Resource" uid="uid://xomoqal1ikev" path="res://commands/move.tres" id="1_2dq5s"]
 [ext_resource type="Script" uid="uid://dk6kwsdnc1ks" path="res://scripts/InputContext.cs" id="1_oc70c"]
 [ext_resource type="Resource" uid="uid://doxqyerf7pvdn" path="res://commands/jump.tres" id="2_6r8gu"]
+[ext_resource type="Resource" uid="uid://gi7cpokq7ss1" path="res://commands/aim.tres" id="3_vrv3r"]
 
 [resource]
 script = ExtResource("1_oc70c")
 _actions = Dictionary[String, Resource]({
+"aim": ExtResource("3_vrv3r"),
 "jump": ExtResource("2_6r8gu"),
 "movement": ExtResource("1_2dq5s")
 })
