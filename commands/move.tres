@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MoveCommand" format=3 uid="uid://xomoqal1ikev"]
+
+[ext_resource type="Script" uid="uid://cshxh8mj3bfxi" path="res://scripts/MoveCommand.cs" id="1_yreop"]
+
+[resource]
+script = ExtResource("1_yreop")
+metadata/_custom_type_script = "uid://cshxh8mj3bfxi"

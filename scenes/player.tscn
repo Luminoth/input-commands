@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5smyqrb8goor"]
 
 [ext_resource type="Script" uid="uid://cmvs2nce8hcrm" path="res://scripts/Player.cs" id="1_3vyb7"]
+[ext_resource type="Resource" uid="uid://lqp7tkcpgnpw" path="res://commands/player_input_context.tres" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sgp6g"]
 
@@ -20,6 +21,7 @@ height = 0.5
 [node name="Player" type="CharacterBody3D" unique_id=509620272 node_paths=PackedStringArray("_pivot")]
 collision_layer = 2
 script = ExtResource("1_3vyb7")
+_inputContext = ExtResource("2_g2els")
 _pivot = NodePath("Pivot")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=906728153]

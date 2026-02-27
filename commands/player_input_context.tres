@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InputContext" format=3 uid="uid://lqp7tkcpgnpw"]
+
+[ext_resource type="Resource" uid="uid://xomoqal1ikev" path="res://commands/move.tres" id="1_2dq5s"]
+[ext_resource type="Script" uid="uid://dk6kwsdnc1ks" path="res://scripts/InputContext.cs" id="1_oc70c"]
+[ext_resource type="Resource" uid="uid://doxqyerf7pvdn" path="res://commands/jump.tres" id="2_6r8gu"]
+
+[resource]
+script = ExtResource("1_oc70c")
+_actions = Dictionary[String, Resource]({
+"jump": ExtResource("2_6r8gu"),
+"movement": ExtResource("1_2dq5s")
+})
+metadata/_custom_type_script = "uid://dk6kwsdnc1ks"

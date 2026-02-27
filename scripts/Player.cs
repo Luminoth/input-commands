@@ -1,47 +1,42 @@
 using Godot;
 
-public partial class Player : CharacterBody3D
+public partial class Player : CharacterBody3D, ICharacter
 {
     [Export]
-    private float _speed = 14;
+    private InputContext _inputContext;
+
+    public Vector2 MoveDirection { get; set; }
 
     [Export]
-    private float _fallAcceleration = 75;
+    private float _moveSpeed = 14.0f;
+
+    [Export]
+    private float _jumpVelocity = 25.0f;
+
+    [Export]
+    private float _fallAcceleration = 75.0f;
 
     [Export]
     private Node3D _pivot;
 
     private Vector3 _targetVelocity = Vector3.Zero;
 
+    public override void _Ready()
+    {
+        InputManager.Instance.Actor = this;
+        InputManager.Instance.PushContext(_inputContext);
+    }
+
     public override void _PhysicsProcess(double delta)
     {
-        var direction = Vector3.Zero;
-
-        if (Input.IsActionPressed("move_left"))
+        if (MoveDirection != Vector2.Zero)
         {
-            direction.X -= 1.0f;
-        }
-        if (Input.IsActionPressed("move_right"))
-        {
-            direction.X += 1.0f;
-        }
-        if (Input.IsActionPressed("move_forward"))
-        {
-            direction.Z -= 1.0f;
-        }
-        if (Input.IsActionPressed("move_backward"))
-        {
-            direction.Z += 1.0f;
+            MoveDirection = MoveDirection.Normalized();
+            _pivot.Basis = Basis.LookingAt(new Vector3(MoveDirection.X, 0.0f, MoveDirection.Y));
         }
 
-        if (direction != Vector3.Zero)
-        {
-            direction = direction.Normalized();
-            _pivot.Basis = Basis.LookingAt(direction);
-        }
-
-        _targetVelocity.X = direction.X * _speed;
-        _targetVelocity.Z = direction.Z * _speed;
+        _targetVelocity.X = MoveDirection.X * _moveSpeed;
+        _targetVelocity.Z = MoveDirection.Y * _moveSpeed;
 
         if (!IsOnFloor())
         {
@@ -50,5 +45,13 @@ public partial class Player : CharacterBody3D
 
         Velocity = _targetVelocity;
         MoveAndSlide();
+    }
+
+    public void Jump()
+    {
+        if (IsOnFloor())
+        {
+            _targetVelocity.Y = _jumpVelocity;
+        }
     }
 }
