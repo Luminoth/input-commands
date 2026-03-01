@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dkmf7kaxd0l3l"]
+
+[ext_resource type="Script" uid="uid://bmkkvtny41aj7" path="res://scripts/Terminal.cs" id="1_aarcj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8a33"]
+albedo_color = Color(0.10628078, 0.23257017, 0.5793658, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sgp6g"]
+material = SubResource("StandardMaterial3D_c8a33")
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_elum0"]
+size = Vector3(2, 2, 2)
+
+[node name="Terminal" type="StaticBody3D" unique_id=2038126841]
+collision_mask = 0
+script = ExtResource("1_aarcj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=912942360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_o5qli")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=260068323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_sgp6g")
+
+[node name="Interact" type="Area3D" parent="." unique_id=279844799]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interact" unique_id=791935514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_elum0")
+
+[connection signal="body_entered" from="Interact" to="." method="_on_interact_body_entered"]
+[connection signal="body_exited" from="Interact" to="." method="_on_interact_body_exited"]
