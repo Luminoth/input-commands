@@ -1,3 +1,5 @@
+namespace InputCommandTest.InputCommands;
+
 using Godot;
 
 [GlobalClass]

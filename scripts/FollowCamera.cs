@@ -1,3 +1,5 @@
+namespace InputCommandTest;
+
 using Godot;
 
 public partial class FollowCamera : Camera3D

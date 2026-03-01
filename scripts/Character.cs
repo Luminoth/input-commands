@@ -1,3 +1,5 @@
+namespace InputCommandTest;
+
 using Godot;
 
 public interface ICharacter

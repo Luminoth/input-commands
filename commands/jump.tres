@@ -1,8 +1,7 @@
 [gd_resource type="Resource" script_class="JumpCommand" format=3 uid="uid://doxqyerf7pvdn"]
 
-[ext_resource type="Script" uid="uid://dy1khki6gwhin" path="res://scripts/JumpCommand.cs" id="1_4kamk"]
+[ext_resource type="Script" uid="uid://dpokvruwjvjvt" path="res://scripts/InputCommands/JumpCommand.cs" id="1_4kamk"]
 
 [resource]
 script = ExtResource("1_4kamk")
-JumpForce = 200.0
 metadata/_custom_type_script = "uid://dy1khki6gwhin"

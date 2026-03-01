@@ -1,6 +1,10 @@
+namespace InputCommandTest.Input;
+
 using Godot;
 
 using System.Collections.Generic;
+
+using InputCommandTest.InputCommands;
 
 [GlobalClass]
 public partial class InputContext : Resource

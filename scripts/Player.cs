@@ -1,4 +1,9 @@
+namespace InputCommandTest;
+
 using Godot;
+
+using InputCommandTest.Input;
+using InputCommandTest.InputCommands;
 
 public partial class Player : CharacterBody3D, ICharacter
 {

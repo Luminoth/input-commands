@@ -1,8 +1,7 @@
 [gd_resource type="Resource" script_class="AimCommand" format=3 uid="uid://gi7cpokq7ss1"]
 
-[ext_resource type="Script" uid="uid://ccuomxes3istr" path="res://scripts/AimCommand.cs" id="1_uypq7"]
+[ext_resource type="Script" uid="uid://h5psbpimpdb6" path="res://scripts/InputCommands/AimCommand.cs" id="1_uypq7"]
 
 [resource]
 script = ExtResource("1_uypq7")
-_sensitivity = 0.2
 metadata/_custom_type_script = "uid://ccuomxes3istr"
