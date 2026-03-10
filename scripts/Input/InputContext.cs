@@ -14,9 +14,9 @@ public partial class InputContext : Resource
 
     public IReadOnlyDictionary<string, Resource> Actions => _actions;
 
-    public ICommand GetCommand(string actionName)
+    public ICommand? GetCommand(string actionName)
     {
-        if (_actions.TryGetValue(actionName, out Resource res) && res is ICommand command)
+        if (_actions.TryGetValue(actionName, out Resource? res) && res is ICommand command)
         {
             return command;
         }

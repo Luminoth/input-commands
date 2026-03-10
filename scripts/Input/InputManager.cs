@@ -6,19 +6,20 @@ using System.Collections.Generic;
 
 public partial class InputManager : Node
 {
-    public static InputManager Instance { get; private set; }
+    public static InputManager? Instance { get; private set; }
 
     private readonly Stack<InputContext> _contextStack = new();
-
-    // TODO: I don't like this being in here
-    [Export]
-    public Node Actor;
-
-    private Vector2 _lookIntent = Vector2.Zero;
 
     public void PushContext(InputContext context) => _contextStack.Push(context);
 
     public void PopContext() => _contextStack.Pop();
+
+    // TODO: I don't like this being in here
+    [Export]
+    public Node? Actor;
+
+    // TODO: this shouldn't assume "look"
+    private Vector2 _lookIntent = Vector2.Zero;
 
     public override void _Ready()
     {
@@ -27,7 +28,7 @@ public partial class InputManager : Node
 
     public override void _Process(double delta)
     {
-        if (_contextStack.Count == 0 || Actor == null)
+        if (_contextStack.Count == 0)
         {
             GD.PushWarning("Empty context stack");
             return;
@@ -35,38 +36,24 @@ public partial class InputManager : Node
 
         var currentContext = _contextStack.Peek();
 
+        // TODO: these should be configurable
+        // and we shouldn't assume "move"
         Vector2 inputDirection = Input.GetVector(
             "move_left", "move_right",
             "move_forward", "move_backward"
         );
 
-        if (inputDirection != Vector2.Zero)
+
+        var moveCommand = currentContext.GetCommand("movement");
+        if (moveCommand == null)
         {
-            var moveCommand = currentContext.GetCommand("movement");
-            if (moveCommand == null)
-            {
-                GD.PushWarning("No movement command found");
-            }
-            moveCommand?.Execute(Actor, inputDirection);
+            GD.PushWarning("No movement command found");
         }
-        else
-        {
-            var moveCommand = currentContext.GetCommand("movement");
-            if (moveCommand == null)
-            {
-                GD.PushWarning("No movement command found");
-            }
-            moveCommand?.Execute(Actor, Vector2.Zero);
-        }
+        moveCommand?.Execute(Actor, inputDirection);
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (_contextStack.Count == 0 || Actor == null)
-        {
-            return;
-        }
-
         if (@event is InputEventMouseMotion mouseMotion)
         {
             _lookIntent = mouseMotion.Relative.Normalized();
@@ -75,14 +62,15 @@ public partial class InputManager : Node
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (_contextStack.Count == 0 || Actor == null)
+        if (_contextStack.Count == 0)
         {
             return;
         }
 
         InputContext currentContext = _contextStack.Peek();
 
-        if (_lookIntent != Vector2.Zero)
+        // TODO; shouldn't assume "aim"
+        if (!_lookIntent.IsZeroApprox())
         {
             var aimCommand = currentContext.GetCommand("aim");
             aimCommand?.Execute(Actor, _lookIntent);
