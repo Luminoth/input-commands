@@ -5,7 +5,7 @@ using Godot;
 [GlobalClass]
 public partial class JumpCommand : Resource, ICommand
 {
-    public bool Execute(Node? actor)
+    public bool Execute(Node3D? actor)
     {
         if (actor is ICharacter character)
         {

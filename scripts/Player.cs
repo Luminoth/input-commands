@@ -69,4 +69,9 @@ public partial class Player : CharacterBody3D, ICharacter
             _targetVelocity.Y = _jumpVelocity;
         }
     }
+
+    public void LookAt(Vector3 point)
+    {
+        Pivot.LookAt(new Vector3(point.X, Pivot.GlobalPosition.Y, point.Z), Vector3.Up);
+    }
 }

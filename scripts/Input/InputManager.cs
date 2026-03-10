@@ -16,10 +16,9 @@ public partial class InputManager : Node
 
     // TODO: I don't like this being in here
     [Export]
-    public Node? Actor;
+    public Node3D? Actor;
 
-    // TODO: this shouldn't assume "look"
-    private Vector2 _lookIntent = Vector2.Zero;
+    private Vector2 _cursorPosition = Vector2.Zero;
 
     public override void _Ready()
     {
@@ -50,13 +49,20 @@ public partial class InputManager : Node
             GD.PushWarning("No movement command found");
         }
         moveCommand?.Execute(Actor, inputDirection);
+
+        var aimCommand = currentContext.GetCommand("aim");
+        if (aimCommand == null)
+        {
+            GD.PushWarning("No aim command found");
+        }
+        aimCommand?.Execute(Actor, _cursorPosition);
     }
 
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouseMotion)
         {
-            _lookIntent = mouseMotion.Relative.Normalized();
+            _cursorPosition = mouseMotion.Position;
         }
     }
 
@@ -68,15 +74,6 @@ public partial class InputManager : Node
         }
 
         InputContext currentContext = _contextStack.Peek();
-
-        // TODO; shouldn't assume "aim"
-        if (!_lookIntent.IsZeroApprox())
-        {
-            var aimCommand = currentContext.GetCommand("aim");
-            aimCommand?.Execute(Actor, _lookIntent);
-
-            _lookIntent = Vector2.Zero;
-        }
 
         foreach (var action in currentContext.Actions.Keys)
         {

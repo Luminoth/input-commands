@@ -5,16 +5,28 @@ using Godot;
 [GlobalClass]
 public partial class AimCommand : Resource, ICommand
 {
-    // TODO: not here
-    [Export]
-    private float _sensitivity = 0.2f;
-
-    public bool Execute(Node? actor, Vector2 value)
+    public bool Execute(Node3D? actor, Vector2 value)
     {
         if (actor is ICharacter character)
         {
-            // TODO: character.Aim() or something?
-            character.Pivot.RotateY(-value.X * _sensitivity);
+            // TODO: I don't really like this ...
+            var camera = actor.GetViewport().GetCamera3D();
+            if (camera == null)
+            {
+                return false;
+            }
+
+            var from = camera.ProjectRayOrigin(value);
+            var dir = camera.ProjectRayNormal(value);
+
+            // plane at the player's feet
+            var plane = new Plane(Vector3.Up, actor.GlobalPosition.Y);
+            var intersection = plane.IntersectsRay(from, dir);
+            if (intersection.HasValue)
+            {
+                character.LookAt(intersection.Value);
+            }
+
             return true;
         }
 

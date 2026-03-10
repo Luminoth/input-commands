@@ -8,5 +8,7 @@ public interface ICharacter
 
     Vector2 MoveDirection { get; set; }
 
+    void LookAt(Vector3 point) { }
+
     void Jump() { }
 }
