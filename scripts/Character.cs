@@ -11,4 +11,6 @@ public interface ICharacter
     void LookAt(Vector3 point) { }
 
     void Jump() { }
+
+    bool Interact() => false;
 }

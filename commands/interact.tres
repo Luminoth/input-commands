@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="InteractCommand" format=3]
+
+[ext_resource type="Script" path="res://scripts/InputCommands/InteractCommand.cs" id="1_intrc"]
+
+[resource]
+script = ExtResource("1_intrc")

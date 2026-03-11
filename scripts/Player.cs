@@ -26,6 +26,10 @@ public partial class Player : CharacterBody3D, ICharacter
 
     public Node3D Pivot => _pivot!;
 
+    // TODO: this should be a priority list or something
+    // we could have multiple interactables in range
+    public Node3D? CurrentInteractable { get; set; }
+
     private Vector3 _targetVelocity = Vector3.Zero;
 
     public override void _Ready()
@@ -73,5 +77,19 @@ public partial class Player : CharacterBody3D, ICharacter
     public void LookAt(Vector3 point)
     {
         Pivot.LookAt(new Vector3(point.X, Pivot.GlobalPosition.Y, point.Z), Vector3.Up);
+    }
+
+    public bool Interact()
+    {
+        // TODO: this is shit lol, need IInteractable
+        if (CurrentInteractable != null && CurrentInteractable.HasMethod("Interact"))
+        {
+            CurrentInteractable.Call("Interact", this);
+            return true;
+        }
+
+        GD.Print("InteractCommand: no interactable nearby");
+        return false;
+
     }
 }
