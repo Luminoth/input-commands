@@ -1,18 +1,43 @@
 [gd_scene format=3 uid="uid://dmlo3u0fikt47"]
 
-[ext_resource type="Script" uid="uid://caw4v5k4kxthq" path="res://scripts/FollowCamera.cs" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://be0g85iv8h7sq" path="res://scenes/world/box.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://2yowolv4nsf1" path="res://scenes/world/floor.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://c5smyqrb8goor" path="res://scenes/player.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_tipki"]
 [ext_resource type="PackedScene" uid="uid://dkmf7kaxd0l3l" path="res://scenes/world/terminal.tscn" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_tipki"]
+
+[sub_resource type="Resource" id="Resource_85g3d"]
+script = ExtResource("2_tipki")
 
 [node name="Node3D" type="Node3D" unique_id=1289818345]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=278018361 node_paths=PackedStringArray("_followTarget", "_lookAtTarget")]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
-script = ExtResource("1_jyhfs")
-_followTarget = NodePath("../Player")
-_lookAtTarget = NodePath("../Player")
+[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=31569708 node_paths=PackedStringArray("follow_target", "look_at_target")]
+transform = Transform3D(1, 0, 0, 0, 0.8659641, 0.49996462, 0, -0.49996462, 0.8659641, 0, 5.499823, 4.3298206)
+top_level = true
+script = ExtResource("1_o6xl0")
+follow_mode = 5
+follow_target = NodePath("../Player")
+look_at_target = NodePath("../Player")
+tween_resource = SubResource("Resource_85g3d")
+follow_offset = Vector3(0, 3, 0)
+follow_distance = 5.0
+spring_length = 5.0
+align_transform_with_view = Callable()
+align_position_with_view = Callable()
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=278018361]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 0.8659641, 0.49996462, 0, -0.49996462, 0.8659641, 0, 5.499823, 4.3298206)
+top_level = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=871643109]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("4_tipki")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="World" type="Node3D" parent="." unique_id=705136912]
 

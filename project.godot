@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+PhantomCameraManager="*uid://duq6jhf6unyis"
 InputManager="*uid://p7sgbghfgrk0"
 
 [display]
@@ -27,6 +28,10 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="InputCommands"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
