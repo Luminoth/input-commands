@@ -3,7 +3,6 @@ namespace InputCommandTest;
 using Godot;
 
 using InputCommandTest.Input;
-using InputCommandTest.InputCommands;
 
 public partial class Player : CharacterBody3D, ICharacter
 {
@@ -64,6 +63,11 @@ public partial class Player : CharacterBody3D, ICharacter
 
         Velocity = _targetVelocity;
         MoveAndSlide();
+    }
+
+    public void OnSpawn()
+    {
+        CameraManager.Instance!.SetCameraActive("player");
     }
 
     public void Jump()

@@ -1,30 +1,22 @@
 namespace InputCommandTest;
 
 using Godot;
-using PhantomCamera;
 
-// TODO: this needs to be registered with a manager
-// and we need to be able to get and change the "active camera"
 public partial class Level : Node
 {
-    // TODO: should we use a dictionary of cameras instead?
+    [Export]
+    Godot.Collections.Dictionary<string, Node3D> _cameraNodes = [];
 
     [Export]
-    private Node3D? _playerCameraNode;
-
-    private PhantomCamera3D? _playerCamera;
-
-    [Export]
-    private Node3D? _droneCameraNode;
-
-    private PhantomCamera3D? _droneCamera;
+    private Player? _player;
 
     public override void _Ready()
     {
-        _playerCamera = _playerCameraNode!.AsPhantomCamera3D();
-        _playerCamera.Priority = 1;
+        foreach (var kvp in _cameraNodes)
+        {
+            CameraManager.Instance!.RegisterCamera(kvp.Key, kvp.Value);
+        }
 
-        _droneCamera = _droneCameraNode!.AsPhantomCamera3D();
-        _droneCamera.Priority = 0;
+        _player!.OnSpawn();
     }
 }
