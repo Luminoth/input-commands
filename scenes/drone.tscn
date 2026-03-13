@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://duad8yklr5x05"]
+
+[ext_resource type="Script" uid="uid://4ar7jejn00wd" path="res://scripts/Drone.cs" id="1_1r4ts"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_knnud"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_1r4ts"]
+[ext_resource type="Resource" uid="uid://dp2eocflg7f7d" path="res://commands/drone_input_context.tres" id="2_umx5g"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wymg3"]
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wymg3"]
+albedo_color = Color(0.5217415, 0.26210335, 0.84846824, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wymg3"]
+material = SubResource("StandardMaterial3D_wymg3")
+height = 0.25
+
+[sub_resource type="Resource" id="Resource_umx5g"]
+script = ExtResource("2_1r4ts")
+
+[node name="Drone" type="CharacterBody3D" unique_id=631995033 node_paths=PackedStringArray("_pivot", "_cameraNode")]
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_1r4ts")
+_inputContext = ExtResource("2_umx5g")
+_pivot = NodePath("Pivot")
+_cameraNode = NodePath("PhantomCamera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=101906871]
+shape = SubResource("CylinderShape3D_wymg3")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1322535808]
+
+[node name="Core" type="MeshInstance3D" parent="Pivot" unique_id=1759950561]
+mesh = SubResource("CylinderMesh_wymg3")
+
+[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=804187723]
+script = ExtResource("1_knnud")
+tween_resource = SubResource("Resource_umx5g")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"

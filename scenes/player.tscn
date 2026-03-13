@@ -44,15 +44,12 @@ mesh = SubResource("CapsuleMesh_o5qli")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5, -0.5)
 mesh = SubResource("CapsuleMesh_g2els")
 
-[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=5444344 node_paths=PackedStringArray("follow_target")]
+[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=5444344]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2.5, 4.330127)
 top_level = true
 script = ExtResource("3_dqkch")
 follow_mode = 5
-follow_target = NodePath("..")
 tween_resource = SubResource("Resource_tuyoq")
 follow_distance = 5.0
 spring_length = 5.0
-align_transform_with_view = Callable()
-align_position_with_view = Callable()
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"

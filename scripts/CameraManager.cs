@@ -17,9 +17,11 @@ public partial class CameraManager : Node
         Instance = this;
     }
 
-    public void RegisterCamera(string cameraName, Node3D cameraNode)
+    public PhantomCamera3D RegisterCamera(string cameraName, Node3D cameraNode)
     {
-        _cameras[cameraName] = cameraNode.AsPhantomCamera3D();
+        var camera = cameraNode.AsPhantomCamera3D();
+        _cameras[cameraName] = camera;
+        return camera;
     }
 
     public void SetCameraActive(string cameraName)
