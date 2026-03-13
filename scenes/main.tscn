@@ -1,42 +1,24 @@
 [gd_scene format=3 uid="uid://dmlo3u0fikt47"]
 
 [ext_resource type="PackedScene" uid="uid://be0g85iv8h7sq" path="res://scenes/world/box.tscn" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://2yowolv4nsf1" path="res://scenes/world/floor.tscn" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://6r52mqvw80kt" path="res://scripts/Level.cs" id="1_tipki"]
 [ext_resource type="PackedScene" uid="uid://c5smyqrb8goor" path="res://scenes/player.tscn" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_tipki"]
 [ext_resource type="PackedScene" uid="uid://dkmf7kaxd0l3l" path="res://scenes/world/terminal.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bpxouklr5qbfg" path="res://scenes/static_camera.tscn" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://c7dxcjo1oklho" path="res://scenes/camera.tscn" id="4_tipki"]
 
-[sub_resource type="Resource" id="Resource_choun"]
-script = ExtResource("2_tipki")
-
-[sub_resource type="Resource" id="Resource_tipki"]
-script = ExtResource("2_tipki")
-
-[node name="Level" type="Node3D" unique_id=1289818345 node_paths=PackedStringArray("_cameraNodes")]
+[node name="Level" type="Node3D" unique_id=1289818345]
 script = ExtResource("1_tipki")
-_cameraNodes = {
-"drone": NodePath("DroneCamera"),
-"static": NodePath("StaticCamera")
-}
 
-[node name="StaticCamera" type="Node3D" parent="." unique_id=561266323]
-transform = Transform3D(-1, 4.3708297e-08, -7.570499e-08, 0, 0.8659641, 0.49996462, 8.742278e-08, 0.49996462, -0.8659641, 0, 5, -15)
-script = ExtResource("1_o6xl0")
-priority = 1
-tween_resource = SubResource("Resource_choun")
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
-
-[node name="DroneCamera" type="Node3D" parent="." unique_id=1125075333]
-script = ExtResource("1_o6xl0")
-tween_resource = SubResource("Resource_tipki")
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+[node name="StaticCamera" parent="." unique_id=1245978365 instance=ExtResource("4_85g3d")]
+transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, 0, 5, -15)
+_name = "static"
+_priority = 1
 
 [node name="Camera3D" parent="." unique_id=1848685781 instance=ExtResource("4_tipki")]
 physics_interpolation_mode = 0
-transform = Transform3D(-1, 4.3708297e-08, -7.570499e-08, 0, 0.8659641, 0.49996462, 8.742278e-08, 0.49996462, -0.8659641, 0, 5, -15)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2.5, 4.330127)
 
 [node name="Player" parent="." unique_id=509620272 instance=ExtResource("2_0wfyh")]
 

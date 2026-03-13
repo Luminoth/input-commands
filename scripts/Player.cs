@@ -39,8 +39,8 @@ public partial class Player : CharacterBody3D, ICharacter
         InputManager.Instance!.Actor = this;
         InputManager.Instance.PushContext(_inputContext!);
 
-        var camera = CameraManager.Instance!.RegisterCamera("player", _cameraNode!);
-        camera.FollowTarget = this;
+        var pcam = CameraManager.Instance!.RegisterCamera("player", _cameraNode!);
+        pcam.FollowTarget = this;
         CameraManager.Instance!.SetCameraActive("player");
     }
 

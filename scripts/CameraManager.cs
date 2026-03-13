@@ -24,6 +24,11 @@ public partial class CameraManager : Node
         return camera;
     }
 
+    public PhantomCamera3D? GetCamera(string name)
+    {
+        return _cameras.GetValueOrDefault(name);
+    }
+
     public void SetCameraActive(string cameraName)
     {
         foreach (var pcam in _cameras.Values)

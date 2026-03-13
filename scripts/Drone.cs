@@ -29,9 +29,7 @@ public partial class Drone : CharacterBody3D, ICharacter
         InputManager.Instance!.Actor = this;
         InputManager.Instance.PushContext(_inputContext!);
 
-        var camera = CameraManager.Instance!.RegisterCamera("player", _cameraNode!);
-        camera.FollowTarget = this;
-        CameraManager.Instance!.SetCameraActive("player");
+        CameraManager.Instance!.RegisterCamera("done", _cameraNode!);
     }
 
     public override void _PhysicsProcess(double delta)
