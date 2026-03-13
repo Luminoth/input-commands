@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c7dxcjo1oklho"]
+
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_cvpoc"]
+
+[node name="Camera3D" type="Camera3D" unique_id=1848685781]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 0.8659641, 0.49996462, 0, -0.49996462, 0.8659641, 0, 0, 0)
+top_level = true
+
+[node name="PhantomCameraHost" type="Node" parent="." unique_id=548613827]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("1_cvpoc")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
