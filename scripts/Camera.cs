@@ -1,7 +1,6 @@
 namespace InputCommandTest;
 
 using Godot;
-using PhantomCamera;
 
 public partial class Camera : Node3D
 {

@@ -26,8 +26,9 @@ public partial class Drone : CharacterBody3D, ICharacter
 
     public override void _Ready()
     {
-        InputManager.Instance!.Actor = this;
-        InputManager.Instance.PushContext(_inputContext!);
+        // TODO:
+        //InputManager.Instance!.Actor = this;
+        //InputManager.Instance.PushContext(_inputContext!);
 
         CameraManager.Instance!.RegisterCamera("done", _cameraNode!);
     }

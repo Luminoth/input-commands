@@ -10,6 +10,7 @@ public partial class AimCommand : Resource, ICommand
         if (actor is ICharacter character)
         {
             // TODO: I don't really like this ...
+            // can we get the camera from the level or the camera manager instead?
             var camera = actor.GetViewport().GetCamera3D();
             if (camera == null)
             {
