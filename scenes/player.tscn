@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cmvs2nce8hcrm" path="res://scripts/Player.cs" id="1_3vyb7"]
 [ext_resource type="Resource" uid="uid://lqp7tkcpgnpw" path="res://commands/player_input_context.tres" id="2_g2els"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_dqkch"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_qlg0r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sgp6g"]
 
@@ -18,11 +20,15 @@ material = SubResource("StandardMaterial3D_3vyb7")
 radius = 0.1
 height = 0.5
 
-[node name="Player" type="CharacterBody3D" unique_id=509620272 node_paths=PackedStringArray("_pivot")]
+[sub_resource type="Resource" id="Resource_tuyoq"]
+script = ExtResource("4_qlg0r")
+
+[node name="Player" type="CharacterBody3D" unique_id=509620272 node_paths=PackedStringArray("_pivot", "_cameraNode")]
 collision_layer = 2
 script = ExtResource("1_3vyb7")
 _inputContext = ExtResource("2_g2els")
 _pivot = NodePath("Pivot")
+_cameraNode = NodePath("PhantomCamera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=906728153]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -37,3 +43,16 @@ mesh = SubResource("CapsuleMesh_o5qli")
 [node name="Nose" type="MeshInstance3D" parent="Pivot" unique_id=1756634824]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5, -0.5)
 mesh = SubResource("CapsuleMesh_g2els")
+
+[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=5444344 node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2.5, 4.330127)
+top_level = true
+script = ExtResource("3_dqkch")
+follow_mode = 5
+follow_target = NodePath("..")
+tween_resource = SubResource("Resource_tuyoq")
+follow_distance = 5.0
+spring_length = 5.0
+align_transform_with_view = Callable()
+align_position_with_view = Callable()
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"

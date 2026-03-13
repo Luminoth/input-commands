@@ -7,16 +7,11 @@ public partial class Level : Node
     [Export]
     Godot.Collections.Dictionary<string, Node3D> _cameraNodes = [];
 
-    [Export]
-    private Player? _player;
-
     public override void _Ready()
     {
         foreach (var kvp in _cameraNodes)
         {
             CameraManager.Instance!.RegisterCamera(kvp.Key, kvp.Value);
         }
-
-        _player!.OnSpawn();
     }
 }

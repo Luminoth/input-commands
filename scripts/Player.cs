@@ -25,6 +25,9 @@ public partial class Player : CharacterBody3D, ICharacter
 
     public Node3D Pivot => _pivot!;
 
+    [Export]
+    private Node3D? _cameraNode;
+
     // TODO: this should be a priority list or something
     // we could have multiple interactables in range
     public Node3D? CurrentInteractable { get; set; }
@@ -35,6 +38,9 @@ public partial class Player : CharacterBody3D, ICharacter
     {
         InputManager.Instance!.Actor = this;
         InputManager.Instance.PushContext(_inputContext!);
+
+        CameraManager.Instance!.RegisterCamera("player", _cameraNode!);
+        CameraManager.Instance!.SetCameraActive("player");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -63,11 +69,6 @@ public partial class Player : CharacterBody3D, ICharacter
 
         Velocity = _targetVelocity;
         MoveAndSlide();
-    }
-
-    public void OnSpawn()
-    {
-        CameraManager.Instance!.SetCameraActive("player");
     }
 
     public void Jump()

@@ -12,40 +12,21 @@
 [sub_resource type="Resource" id="Resource_choun"]
 script = ExtResource("2_tipki")
 
-[sub_resource type="Resource" id="Resource_85g3d"]
-script = ExtResource("2_tipki")
-
 [sub_resource type="Resource" id="Resource_tipki"]
 script = ExtResource("2_tipki")
 
-[node name="Level" type="Node3D" unique_id=1289818345 node_paths=PackedStringArray("_cameraNodes", "_player")]
+[node name="Level" type="Node3D" unique_id=1289818345 node_paths=PackedStringArray("_cameraNodes")]
 script = ExtResource("1_tipki")
 _cameraNodes = {
 "drone": NodePath("DroneCamera"),
-"player": NodePath("PlayerCamera"),
 "static": NodePath("StaticCamera")
 }
-_player = NodePath("Player")
 
 [node name="StaticCamera" type="Node3D" parent="." unique_id=561266323]
 transform = Transform3D(-1, 4.3708297e-08, -7.570499e-08, 0, 0.8659641, 0.49996462, 8.742278e-08, 0.49996462, -0.8659641, 0, 5, -15)
 script = ExtResource("1_o6xl0")
 priority = 1
 tween_resource = SubResource("Resource_choun")
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
-
-[node name="PlayerCamera" type="Node3D" parent="." unique_id=31569708 node_paths=PackedStringArray("follow_target")]
-transform = Transform3D(1, 0, 0, 0, 0.8659641, 0.49996462, 0, -0.49996462, 0.8659641, 0, 5.499823, 4.3298206)
-top_level = true
-script = ExtResource("1_o6xl0")
-follow_mode = 5
-follow_target = NodePath("../Player")
-tween_resource = SubResource("Resource_85g3d")
-follow_offset = Vector3(0, 3, 0)
-follow_distance = 5.0
-spring_length = 5.0
-align_transform_with_view = Callable()
-align_position_with_view = Callable()
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="DroneCamera" type="Node3D" parent="." unique_id=1125075333]
