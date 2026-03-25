@@ -2,6 +2,8 @@ namespace InputCommandTest;
 
 using Godot;
 
+using InputCommandTest.Input;
+
 public partial class Terminal : Node3D
 {
     [Export]
@@ -25,16 +27,10 @@ public partial class Terminal : Node3D
         AddChild(_drone);
         _drone!.GlobalPosition = _droneSpawn!.GlobalPosition;
 
-        /*
-        // switch actor to drone (TODO: I don't like this)
-        InputManager.Instance.Actor = GetNode<Node>("../Drone");
+        CameraManager.Instance!.SetCameraActive("drone");
 
-        // update the input context
-        InputManager.Instance.PushContext(ResourceLoader.Load<InputContext>("res://DroneContext.tres"));
-
-        // update to the drone camera
-        GetNode<Camera3D>("../Drone/Camera").MakeCurrent();
-        */
+        //InputManager.Instance!.Actor = _drone;
+        //InputManager.Instance.PushContext(_drone.InputContext!);
     }
 
     public void _on_interact_body_entered(Node3D body)

@@ -9,6 +9,8 @@ public partial class Drone : CharacterBody3D, ICharacter
     [Export]
     private InputContext? _inputContext;
 
+    public InputContext InputContext => _inputContext!;
+
     public Vector2 MoveDirection { get; set; }
 
     [Export]
@@ -26,12 +28,7 @@ public partial class Drone : CharacterBody3D, ICharacter
 
     public override void _Ready()
     {
-        // TODO:
-        //InputManager.Instance!.Actor = this;
-        //InputManager.Instance.PushContext(_inputContext!);
-
-        CameraManager.Instance!.RegisterCamera("done", _cameraNode!);
-        CameraManager.Instance!.SetCameraActive("drone");
+        CameraManager.Instance!.RegisterCamera("drone", _cameraNode!);
     }
 
     public override void _PhysicsProcess(double delta)
