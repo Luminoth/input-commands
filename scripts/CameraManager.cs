@@ -29,6 +29,7 @@ public partial class CameraManager : Node
         return _cameras.GetValueOrDefault(name);
     }
 
+    // TODO: should support push / pop
     public void SetCameraActive(string cameraName)
     {
         foreach (var pcam in _cameras.Values)
