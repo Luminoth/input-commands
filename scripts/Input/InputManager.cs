@@ -35,19 +35,16 @@ public partial class InputManager : Node
 
         var currentContext = _contextStack.Peek();
 
-        // TODO: these should be configurable
-        // and we shouldn't assume "move"
         Vector2 inputDirection = Input.GetVector(
             "move_left", "move_right",
             "move_forward", "move_backward"
         );
 
-
         var moveCommand = currentContext.GetCommand("movement");
         moveCommand?.Execute(Actor, inputDirection);
 
-        var aimCommand = currentContext.GetCommand("aim");
-        aimCommand?.Execute(Actor, _cursorPosition);
+        var cursorPositionCommand = currentContext.GetCommand("cursor_position");
+        cursorPositionCommand?.Execute(Actor, _cursorPosition);
     }
 
     public override void _Input(InputEvent @event)

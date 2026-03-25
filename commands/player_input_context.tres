@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("1_4ysyk")
 _actions = Dictionary[String, Resource]({
-"aim": ExtResource("3_vrv3r"),
+"cursor_position": ExtResource("3_vrv3r"),
 "jump": ExtResource("2_6r8gu"),
 "movement": ExtResource("1_2dq5s"),
 "interact": ExtResource("4_intrc")
