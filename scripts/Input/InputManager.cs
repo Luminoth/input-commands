@@ -44,17 +44,9 @@ public partial class InputManager : Node
 
 
         var moveCommand = currentContext.GetCommand("movement");
-        if (moveCommand == null)
-        {
-            GD.PushWarning("No movement command found");
-        }
         moveCommand?.Execute(Actor, inputDirection);
 
         var aimCommand = currentContext.GetCommand("aim");
-        if (aimCommand == null)
-        {
-            GD.PushWarning("No aim command found");
-        }
         aimCommand?.Execute(Actor, _cursorPosition);
     }
 
