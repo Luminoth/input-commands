@@ -28,6 +28,7 @@ public partial class Drone : CharacterBody3D, ICharacter
 
     public override void _Ready()
     {
+        _inputContext!.Owner = this;
         CameraManager.Instance!.RegisterCamera("drone", _cameraNode!);
     }
 

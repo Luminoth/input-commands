@@ -14,6 +14,8 @@ public partial class InputContext : Resource
 
     public IReadOnlyDictionary<string, Resource> Actions => _actions;
 
+    public Node3D? Owner { get; set; }
+
     public ICommand? GetCommand(string actionName)
     {
         if (_actions.TryGetValue(actionName, out Resource? res) && res is ICommand command)

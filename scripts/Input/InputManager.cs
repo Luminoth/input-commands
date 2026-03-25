@@ -14,10 +14,6 @@ public partial class InputManager : Node
 
     public void PopContext() => _contextStack.Pop();
 
-    // TODO: I don't like this being in here
-    [Export]
-    public Node3D? Actor;
-
     private Vector2 _cursorPosition = Vector2.Zero;
 
     public override void _Ready()
@@ -41,10 +37,10 @@ public partial class InputManager : Node
         );
 
         var moveCommand = currentContext.GetCommand("movement");
-        moveCommand?.Execute(Actor, inputDirection);
+        moveCommand?.Execute(currentContext.Owner, inputDirection);
 
         var cursorPositionCommand = currentContext.GetCommand("cursor_position");
-        cursorPositionCommand?.Execute(Actor, _cursorPosition);
+        cursorPositionCommand?.Execute(currentContext.Owner, _cursorPosition);
     }
 
     public override void _Input(InputEvent @event)
@@ -69,7 +65,7 @@ public partial class InputManager : Node
             if (InputMap.HasAction(action) && @event.IsActionPressed(action))
             {
                 var command = currentContext.GetCommand(action);
-                if (command?.Execute(Actor) ?? false)
+                if (command?.Execute(currentContext.Owner) ?? false)
                 {
                     GetViewport().SetInputAsHandled();
                     break;

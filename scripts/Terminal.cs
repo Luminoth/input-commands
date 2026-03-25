@@ -28,9 +28,7 @@ public partial class Terminal : Node3D
         _drone!.GlobalPosition = _droneSpawn!.GlobalPosition;
 
         CameraManager.Instance!.SetCameraActive("drone");
-
-        InputManager.Instance!.Actor = _drone;
-        InputManager.Instance.PushContext(_drone.InputContext!);
+        InputManager.Instance!.PushContext(_drone.InputContext!);
     }
 
     public void _on_interact_body_entered(Node3D body)

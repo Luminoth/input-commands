@@ -36,8 +36,8 @@ public partial class Player : CharacterBody3D, ICharacter
 
     public override void _Ready()
     {
-        InputManager.Instance!.Actor = this;
-        InputManager.Instance.PushContext(_inputContext!);
+        _inputContext!.Owner = this;
+        InputManager.Instance!.PushContext(_inputContext!);
 
         var pcam = CameraManager.Instance!.RegisterCamera("player", _cameraNode!);
         pcam.FollowTarget = this;
