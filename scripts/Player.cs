@@ -96,6 +96,5 @@ public partial class Player : CharacterBody3D, ICharacter
 
         GD.Print("InteractCommand: no interactable nearby");
         return false;
-
     }
 }

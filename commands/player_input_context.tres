@@ -10,8 +10,8 @@
 script = ExtResource("1_4ysyk")
 _actions = Dictionary[String, Resource]({
 "cursor_position": ExtResource("3_vrv3r"),
+"interact": ExtResource("4_intrc"),
 "jump": ExtResource("2_6r8gu"),
-"movement": ExtResource("1_2dq5s"),
-"interact": ExtResource("4_intrc")
+"movement": ExtResource("1_2dq5s")
 })
 metadata/_custom_type_script = "uid://dk6kwsdnc1ks"

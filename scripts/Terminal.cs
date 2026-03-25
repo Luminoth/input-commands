@@ -24,8 +24,11 @@ public partial class Terminal : Node3D
     {
         GD.Print("Terminal Interacted!");
 
-        AddChild(_drone);
-        _drone!.GlobalPosition = _droneSpawn!.GlobalPosition;
+        if (!_drone!.IsInsideTree())
+        {
+            AddChild(_drone);
+        }
+        _drone.GlobalPosition = _droneSpawn!.GlobalPosition;
 
         CameraManager.Instance!.SetCameraActive("drone");
         InputManager.Instance!.PushContext(_drone.InputContext!);
