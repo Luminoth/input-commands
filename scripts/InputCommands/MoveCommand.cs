@@ -5,7 +5,7 @@ using Godot;
 [GlobalClass]
 public partial class MoveCommand : Resource, ICommand
 {
-    public bool Execute(Node3D? actor, Vector2 value)
+    public bool Update(Node3D? actor, Vector2 value)
     {
         if (actor is ICharacter character)
         {

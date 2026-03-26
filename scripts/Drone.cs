@@ -60,14 +60,24 @@ public partial class Drone : CharacterBody3D, ICharacter
         Pivot.LookAt(new Vector3(point.X, Pivot.GlobalPosition.Y, point.Z), Vector3.Up);
     }
 
-    public void Jump()
+    public void JumpPressed()
     {
-        // TODO:
+        _targetVelocity.Y = _moveSpeed;
     }
 
-    public void Crouch()
+    public void JumpReleased()
     {
-        // TODO:
+        _targetVelocity.Y = 0.0f;
+    }
+
+    public void CrouchPressed()
+    {
+        _targetVelocity.Y = -_moveSpeed;
+    }
+
+    public void CrouchReleased()
+    {
+        _targetVelocity.Y = 0.0f;
     }
 
     public bool Interact()

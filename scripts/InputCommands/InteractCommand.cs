@@ -5,7 +5,7 @@ using Godot;
 [GlobalClass]
 public partial class InteractCommand : Resource, ICommand
 {
-    public bool Execute(Node3D? actor)
+    public bool Pressed(Node3D? actor)
     {
         if (actor is ICharacter character)
         {

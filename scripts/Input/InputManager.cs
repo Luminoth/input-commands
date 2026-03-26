@@ -37,10 +37,10 @@ public partial class InputManager : Node
         );
 
         var moveCommand = currentContext.GetCommand("movement");
-        moveCommand?.Execute(currentContext.Owner, inputDirection);
+        moveCommand?.Update(currentContext.Owner, inputDirection);
 
         var cursorPositionCommand = currentContext.GetCommand("cursor_position");
-        cursorPositionCommand?.Execute(currentContext.Owner, _cursorPosition);
+        cursorPositionCommand?.Update(currentContext.Owner, _cursorPosition);
     }
 
     public override void _Input(InputEvent @event)
@@ -62,13 +62,25 @@ public partial class InputManager : Node
 
         foreach (var action in currentContext.Actions.Keys)
         {
-            if (InputMap.HasAction(action) && @event.IsActionPressed(action))
+            if (InputMap.HasAction(action))
             {
-                var command = currentContext.GetCommand(action);
-                if (command?.Execute(currentContext.Owner) ?? false)
+                if (@event.IsActionPressed(action))
                 {
-                    GetViewport().SetInputAsHandled();
-                    break;
+                    var command = currentContext.GetCommand(action);
+                    if (command?.Pressed(currentContext.Owner) ?? false)
+                    {
+                        GetViewport().SetInputAsHandled();
+                        break;
+                    }
+                }
+                else if (@event.IsActionReleased(action))
+                {
+                    var command = currentContext.GetCommand(action);
+                    if (command?.Released(currentContext.Owner) ?? false)
+                    {
+                        GetViewport().SetInputAsHandled();
+                        break;
+                    }
                 }
             }
         }

@@ -10,9 +10,13 @@ public interface ICharacter
 
     void LookAt(Vector3 point) { }
 
-    void Jump() { }
+    void JumpPressed() { }
 
-    void Crouch() { }
+    void JumpReleased() { }
+
+    void CrouchPressed() { }
+
+    void CrouchReleased() { }
 
     bool Interact() => false;
 }

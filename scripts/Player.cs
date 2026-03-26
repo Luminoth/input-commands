@@ -72,7 +72,7 @@ public partial class Player : CharacterBody3D, ICharacter
         MoveAndSlide();
     }
 
-    public void Jump()
+    public void JumpPressed()
     {
         if (IsOnFloor())
         {
@@ -80,7 +80,12 @@ public partial class Player : CharacterBody3D, ICharacter
         }
     }
 
-    public void Crouch()
+    public void CrouchPressed()
+    {
+        // TODO:
+    }
+
+    public void CrouchReleased()
     {
         // TODO:
     }
