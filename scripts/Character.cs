@@ -12,5 +12,7 @@ public interface ICharacter
 
     void Jump() { }
 
+    void Crouch() { }
+
     bool Interact() => false;
 }

@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://c31je0klic2xi" path="res://scripts/Input/InputContext.cs" id="1_bi3r5"]
 [ext_resource type="Resource" path="res://commands/interact.tres" id="1_uubb1"]
 [ext_resource type="Resource" uid="uid://xomoqal1ikev" path="res://commands/move.tres" id="2_jiogy"]
+[ext_resource type="Resource" uid="uid://doxqyerf7pvdn" path="res://commands/jump.tres" id="3_1qowf"]
+[ext_resource type="Resource" uid="uid://gywpds8hutut" path="res://commands/crouch.tres" id="4_nk7at"]
 
 [resource]
 script = ExtResource("1_bi3r5")
 _actions = Dictionary[String, Resource]({
+"crouch": ExtResource("4_nk7at"),
 "interact": ExtResource("1_uubb1"),
+"jump": ExtResource("3_1qowf"),
 "movement": ExtResource("2_jiogy")
 })
 metadata/_custom_type_script = "uid://c31je0klic2xi"

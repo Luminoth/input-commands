@@ -60,6 +60,16 @@ public partial class Drone : CharacterBody3D, ICharacter
         Pivot.LookAt(new Vector3(point.X, Pivot.GlobalPosition.Y, point.Z), Vector3.Up);
     }
 
+    public void Jump()
+    {
+        // TODO:
+    }
+
+    public void Crouch()
+    {
+        // TODO:
+    }
+
     public bool Interact()
     {
         CameraManager.Instance!.SetCameraActive("player");

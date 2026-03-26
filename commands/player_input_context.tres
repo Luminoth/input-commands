@@ -5,13 +5,14 @@
 [ext_resource type="Resource" uid="uid://doxqyerf7pvdn" path="res://commands/jump.tres" id="2_6r8gu"]
 [ext_resource type="Resource" uid="uid://gi7cpokq7ss1" path="res://commands/aim.tres" id="3_vrv3r"]
 [ext_resource type="Resource" path="res://commands/interact.tres" id="4_intrc"]
+[ext_resource type="Resource" uid="uid://gywpds8hutut" path="res://commands/crouch.tres" id="5_8gucr"]
 
 [resource]
 script = ExtResource("1_4ysyk")
 _actions = Dictionary[String, Resource]({
+"crouch": ExtResource("5_8gucr"),
 "cursor_position": ExtResource("3_vrv3r"),
 "interact": ExtResource("4_intrc"),
 "jump": ExtResource("2_6r8gu"),
 "movement": ExtResource("1_2dq5s")
 })
-metadata/_custom_type_script = "uid://dk6kwsdnc1ks"

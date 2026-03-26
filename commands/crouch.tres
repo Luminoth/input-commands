@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CrouchCommand" format=3 uid="uid://gywpds8hutut"]
+
+[ext_resource type="Script" uid="uid://bh75c3f4nk287" path="res://scripts/InputCommands/CrouchCommand.cs" id="1_i8v7i"]
+
+[resource]
+script = ExtResource("1_i8v7i")
+metadata/_custom_type_script = "uid://bh75c3f4nk287"
