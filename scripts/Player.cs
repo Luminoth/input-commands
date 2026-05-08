@@ -9,6 +9,9 @@ public partial class Player : CharacterBody3D, ICharacter
     [Export]
     private InputContext? _inputContext;
 
+    [Export]
+    private InputState? _inputState;
+
     public Vector2 MoveDirection { get; set; }
 
     [Export]
@@ -36,7 +39,7 @@ public partial class Player : CharacterBody3D, ICharacter
 
     public override void _Ready()
     {
-        _inputContext!.Owner = this;
+        _inputContext!.OwnerState = _inputState;
         InputManager.Instance!.PushContext(_inputContext!);
 
         var pcam = CameraManager.Instance!.RegisterCamera("player", _cameraNode!);

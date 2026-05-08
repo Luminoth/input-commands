@@ -14,41 +14,35 @@ public partial class InputManager : Node
 
     public void PopContext() => _contextStack.Pop();
 
-    private Vector2 _cursorPosition = Vector2.Zero;
-
     public override void _Ready()
     {
         Instance = this;
+
+        // TODO: disable _Process / _Input / _UnhandledInput on server
     }
 
     public override void _Process(double delta)
     {
         if (_contextStack.Count == 0)
         {
-            GD.PushWarning("Empty context stack");
+            GD.PushWarning("Empty context stack for process");
             return;
         }
 
         var currentContext = _contextStack.Peek();
-
-        Vector2 inputDirection = Input.GetVector(
-            "move_left", "move_right",
-            "move_forward", "move_backward"
-        );
-
-        var moveCommand = currentContext.GetCommand("movement");
-        moveCommand?.Update(currentContext.Owner, inputDirection);
-
-        var cursorPositionCommand = currentContext.GetCommand("cursor_position");
-        cursorPositionCommand?.Update(currentContext.Owner, _cursorPosition);
+        currentContext.Process();
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion mouseMotion)
+        if (_contextStack.Count == 0)
         {
-            _cursorPosition = mouseMotion.Position;
+            GD.PushWarning("Empty context stack for input");
+            return;
         }
+
+        var currentContext = _contextStack.Peek();
+        currentContext.HandleInput(@event);
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -58,31 +52,7 @@ public partial class InputManager : Node
             return;
         }
 
-        InputContext currentContext = _contextStack.Peek();
-
-        foreach (var action in currentContext.Actions.Keys)
-        {
-            if (InputMap.HasAction(action))
-            {
-                if (@event.IsActionPressed(action))
-                {
-                    var command = currentContext.GetCommand(action);
-                    if (command?.Pressed(currentContext.Owner) ?? false)
-                    {
-                        GetViewport().SetInputAsHandled();
-                        break;
-                    }
-                }
-                else if (@event.IsActionReleased(action))
-                {
-                    var command = currentContext.GetCommand(action);
-                    if (command?.Released(currentContext.Owner) ?? false)
-                    {
-                        GetViewport().SetInputAsHandled();
-                        break;
-                    }
-                }
-            }
-        }
+        var currentContext = _contextStack.Peek();
+        currentContext.HandleUnhandledInput(@event);
     }
 }

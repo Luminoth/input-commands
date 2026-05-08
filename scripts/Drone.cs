@@ -11,6 +11,9 @@ public partial class Drone : CharacterBody3D, ICharacter
 
     public InputContext InputContext => _inputContext!;
 
+    [Export]
+    private InputState? _inputState;
+
     public Vector2 MoveDirection { get; set; }
 
     [Export]
@@ -28,7 +31,7 @@ public partial class Drone : CharacterBody3D, ICharacter
 
     public override void _Ready()
     {
-        _inputContext!.Owner = this;
+        _inputContext!.OwnerState = _inputState;
         CameraManager.Instance!.RegisterCamera("drone", _cameraNode!);
     }
 
